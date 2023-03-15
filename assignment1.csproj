@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>a2668a28-3fb5-4b12-b17f-15799b0a198e</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Home\image\**" />
+    <Compile Remove="Views\NewFolder\**" />
+    <Content Remove="Views\Home\image\**" />
+    <Content Remove="Views\NewFolder\**" />
+    <EmbeddedResource Remove="Views\Home\image\**" />
+    <EmbeddedResource Remove="Views\NewFolder\**" />
+    <None Remove="Views\Home\image\**" />
+    <None Remove="Views\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\css\customs.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\css\customs.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="dotenv.net" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
+  </ItemGroup>
+  <Target Name="SCSSToCSS" BeforeTargets="Build">
+    <Exec Command="mkdir $(ProjectDir)wwwroot/css" Condition="!Exists('$(ProjectDir)wwwroot/css')" />
+    <Exec Command="sass --no-source-map ./Styles/site.scss ./wwwroot/css/site.css" />
+  </Target>
+</Project>
